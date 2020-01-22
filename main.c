@@ -1,19 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define uint unsigned int
+#define uint unsigned
+#define max_x_coord 8
+#define max_y_coord 8
+#define len_CB 16
 
-const uint max_x_coord = 8;
-const uint max_y_coord = 8;
-const uint len_CB = 16;
-uint** place[max_x_coord][max_y_coord] = {[0 ... max_y_coord-1] = {[0 ... max_x_coord-1] = 0}}; // init zero array 8 * 8
-uint* code_block[len_CB];
-__uint16_t count;
 typedef struct{
-    uint x_pos;
-    uint y_pos;
+    uint x;
+    uint y;
     uint amount_blocks;
-    uint info;
+    uint info;          // result function info()
 } life;
 
 void executor(life, uint);
@@ -23,13 +20,17 @@ void info(life, uint);
 void attack(life, uint);
 
 int main(){
-    life life;
-    life.x_pos = 5;
-    life.y_pos = 5;
-    life.amount_blocks = 0;
-    life.info = 0;
+    uint place[max_y_coord][max_x_coord] = {[0 ... max_y_coord-1] = {[0 ... max_x_coord-1] = 0}}; // init zero array 8 * 8
+    uint code_block[len_CB] = {[0 ... len_CB-1] = 0};
+    register __uint16_t count;
+
+    life lifes[5];
+    lifes[0].x = 5;
+    lifes[0].y = 5;
+    lifes[0].amount_blocks = 0;
+    lifes[0].info = 0;
     while(count < len_CB){
-        executor(life, code_block[count]);
+        executor(lifes[0], code_block[count]);
         count++;
     }
     return 0;
@@ -58,6 +59,15 @@ void executor(life life, uint num_code){
         }
     }
 }
-void move(life life, uint way){
+void move(life life, uint direction){
+
+}
+void drop(life life, uint direction){
+
+}
+void info(life life, uint direction){
+
+}
+void attack(life life, uint direction){
 
 }
